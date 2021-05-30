@@ -230,7 +230,10 @@ endfunction
 
 function s:execute_in_result_window(bufnr, cmd) abort
   for winid in win_findbuf(a:bufnr)
-    call win_execute(winid, a:cmd)
+    let currentnr = win_getid()
+    call win_gotoid(winid)
+    call execute(a:cmd)
+    call win_gotoid(currentnr)
   endfor
 endfunction
 
